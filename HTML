@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Zodiac Art</title>
+  <style>
+    /* General styling */
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: #1b1b3a; /* Dark blue background */
+      color: #e0e0e0; /* Light text color */
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+    }
+
+    /* Container styling */
+    #content {
+      max-width: 800px;
+      margin: 50px auto;
+      padding: 30px;
+      background-color: rgba(43, 43, 68, 0.95); /* Semi-transparent background */
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+      border-radius: 10px;
+      color: #ffffff;
+    }
+
+    /* Header styling */
+    h1 {
+      color: #e0aaff; /* Light purple for main title */
+      font-size: 2.5em;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      color: #ffec99; /* Soft golden color for zodiac sign */
+    }
+
+    h3 {
+      color: #a8dadc; /* Light teal for painting title */
+    }
+
+    /* Button styling */
+    button {
+      padding: 10px 20px;
+      font-size: 1em;
+      color: #ffffff;
+      background-color: #6272a4; /* Purple-blue button */
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+
+    button:hover {
+      background-color: #7086d6; /* Slightly lighter on hover */
+    }
+
+    /* Input styling */
+    input[type="date"] {
+      padding: 10px;
+      font-size: 1em;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      margin-top: 20px;
+      background-color: #2e2e4f; /* Darker background for input */
+      color: #ffffff;
+    }
+
+    /* Image styling */
+    img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      margin-top: 20px;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+    }
+
+    /* Starry background */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.1), transparent 40%);
+      background-size: 5px 5px;
+      z-index: -1;
+      opacity: 0.5;
+      animation: twinkle 2s infinite alternate;
+    }
+
+    /* Twinkling star effect */
+    @keyframes twinkle {
+      from {
+        opacity: 0.3;
+      }
+      to {
+        opacity: 0.7;
+      }
+    }
+
+    /* Text styling for paragraphs */
+    p {
+      text-align: left;
+      color: #dcdcdc;
+      margin: 20px;
+      line-height: 1.6;
+    }
+
+    /* Anchor styling for image links */
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+<div id="content">
+  <h1>Discover Your Zodiac Art</h1>
+  <p>Enter your birthday to see a famous painting that matches your zodiac sign:</p>
+  <input type="date" id="birthday">
+  <button onclick="showZodiacArt()">Show My Art</button>
+
+  <div id="result"></div>
+</div>
+
+<script>
+  function getZodiacSign(date) {
+    const month = date.getMonth() + 1;  // JavaScript months are 0-based
+    const day = date.getDate();
+
+    if ((month === 1 && day >= 20) || (month === 2 && day <= 18)) return "Aquarius";
+    if ((month === 2 && day >= 19) || (month === 3 && day <= 20)) return "Pisces";
+    if ((month === 3 && day >= 21) || (month === 4 && day <= 19)) return "Aries";
+    if ((month === 4 && day >= 20) || (month === 5 && day <= 20)) return "Taurus";
+    if ((month === 5 && day >= 21) || (month === 6 && day <= 20)) return "Gemini";
+    if ((month === 6 && day >= 21) || (month === 7 && day <= 22)) return "Cancer";
+    if ((month === 7 && day >= 23) || (month === 8 && day <= 22)) return "Leo";
+    if ((month === 8 && day >= 23) || (month === 9 && day <= 22)) return "Virgo";
+    if ((month === 9 && day >= 23) || (month === 10 && day <= 22)) return "Libra";
+    if ((month === 10 && day >= 23) || (month === 11 && day <= 21)) return "Scorpio";
+    if ((month === 11 && day >= 22) || (month === 12 && day <= 21)) return "Sagittarius";
+    if ((month === 12 && day >= 22) || (month === 1 && day <= 19)) return "Capricorn";
+
+    return "Unknown";
+  }
+
+  function showZodiacArt() {
+    const birthdayInput = document.getElementById('birthday').value;
+    if (!birthdayInput) {
+      alert("Please enter your birthday.");
+      return;
+    }
+
+    const birthday = new Date(birthdayInput);
+    const sign = getZodiacSign(birthday);
+
+    const paintings = {
+      "Aquarius": {
+        image: "=https://commons.wikimedia.org/wiki/File:Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg#/media/File:Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg",
+        title: "The Starry Night",
+        artist: "Vincent van Gogh",
+        description: "Vincent van Gogh was a post-impressionist painter known for his bold colors and expressive brushstrokes. 'The Starry Night' is one of his most famous works."
+      },
+      "Pisces": {
+        image: "https://upload.wikimedia.org/wikipedia/commons/0/0e/The_Great_Wave_off_Kanagawa.jpg",
+        title: "The Great Wave off Kanagawa",
+        artist: "Katsushika Hokusai",
+        description: "Katsushika Hokusai was a Japanese ukiyo-e artist, and his work 'The Great Wave' is an iconic example of his mastery in woodblock printing."
+      },
+      "Taurus": {
+        image: "https://upload.wikimedia.org/wikipedia/commons/6/65/Claude_Monet_-_Water_Lilies_-_Google_Art_Project.jpg",
+        title: "Water Lilies",
+        artist: "Claude Monet",
+        description: "Claude Monet was a founder of French Impressionism. His 'Water Lilies' series, painted in his own garden, showcases his fascination with light and natural beauty."
+      },
+      "Gemini": {
+        image: "https://upload.wikimedia.org/wikipedia/commons/f/f6/The_Kiss_1908.jpg",
+        title: "The Kiss",
+        artist: "Gustav Klimt",
+        description: "Gustav Klimt was an Austrian Symbolist painter known for his gilded works and rich detail. 'The Kiss' is celebrated for its romantic subject and opulent textures."
+      },
+      "Cancer": {
+        image: "https://upload.wikimedia.org/wikipedia/commons/a/a1/John_Everett_Millais_-_Ophelia_-_Google_Art_Project.jpg",
+        title: "Ophelia",
+        artist: "John Everett Millais",
+        description: "John Everett Millais, a founding member of the Pre-Raphaelite Brotherhood, created 'Ophelia' as a highly detailed and emotive portrayal of Shakespeare's tragic character."
+      },
+      "Leo": {
+        image: "https://upload.wikimedia.org/wikipedia/commons/4/4d/Liberty_Leading_the_People.jpg",
+        title: "Liberty Leading the People",
+        artist: "Eugène Delacroix",
+        description: "French Romantic artist Eugène Delacroix captures the revolutionary spirit of France in 'Liberty Leading the People', a dramatic and symbolic depiction of freedom and courage."
+      },
+      "Virgo": {
+        image: "https://upload.wikimedia.org/wikipedia/commons/d/df/Meisje_met_de_parel.jpg",
+        title: "Girl with a Pearl Earring",
+        artist: "Johannes Vermeer",
+        description: "Known as the 'Mona Lisa of the North,' Vermeer’s 'Girl with a Pearl Earring' captures mystery and subtle emotion through the subject’s expressive gaze and soft lighting."
+      },
+      "Libra": {
+        image: "https://upload.wikimedia.org/wikipedia/commons/0/0b/Sandro_Botticelli_-_La_Nascita_di_Venere_-_Google_Art_Project.jpg",
+        title: "The Birth of Venus",
+        artist: "Sandro Botticelli",
+        description: "Renaissance artist Sandro Botticelli created 'The Birth of Venus' as a celebration of beauty and love, with Venus depicted emerging gracefully from the sea."
+      },
+      "Scorpio": {
+        image: "https://upload.wikimedia.org/wikipedia/commons/3/36/Saturn_Devouring_His_Son.jpg",
+        title: "Saturn Devouring His Son",
+        artist: "Francisco Goya",
+        description: "Spanish painter Francisco Goya’s haunting 'Saturn Devouring His Son' reflects themes of darkness and power, emblematic of his later works known as the 'Black Paintings.'"
+      },
+      "Sagittarius": {
+        image: "https://upload.wikimedia.org/wikipedia/commons/a/a5/Hieronymus_Bosch_-_The_Garden_of_Earthly_Delights_-_WGA2505.jpg",
+        title: "The Garden of Earthly Delights",
+        artist: "Hieronymus Bosch",
+        description: "Hieronymus Bosch’s triptych 'The Garden of Earthly Delights' is famous for its surreal scenes, symbolizing paradise, earthly pleasures, and consequences, respectively."
+      },
+      "Capricorn": {
+        image: "https://upload.wikimedia.org/wikipedia/commons/6/6e/Arnolfini_Portrait.jpg",
+        title: "The Arnolfini Portrait",
+        artist: "Jan van Eyck",
+        description: "Early Netherlandish painter Jan van Eyck’s 'Arnolfini Portrait' is celebrated for its incredible detail and symbolism, depicting a couple with lifelike precision."
+      }
+    };
+
+    const painting = paintings[sign];
+
+    if (painting) {
+      document.getElementById('result').innerHTML = `
+        <h2>Your Zodiac Sign: ${sign}</h2>
+        <h3>${painting.title} by ${painting.artist}</h3>
+        <a href="${painting.image}" target="_blank">
+          <img src="${painting.image}" alt="${painting.title}">
+        </a>
+        <p>${painting.description}</p>
+      `;
+    } else {
+      document.getElementById('result').innerHTML = "<p>Sorry, we couldn't find art for your zodiac sign.</p>";
+    }
+  }
+</script>
+
+</body>
+</html>
